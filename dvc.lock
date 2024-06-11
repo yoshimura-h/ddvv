@@ -24,3 +24,31 @@ stages:
       hash: md5
       md5: b21fcb6ee16c98a7c6667d11d87e32c0
       size: 2627
+  train:
+    cmd: python src/train.py 50 0.2 3
+    deps:
+    - path: dataset/train.csv
+      hash: md5
+      md5: 596ce7d82b8110bae9e5a19f2e5f3b26
+      size: 20732
+    - path: dataset/val.csv
+      hash: md5
+      md5: b21fcb6ee16c98a7c6667d11d87e32c0
+      size: 2627
+    - path: src/train.py
+      hash: md5
+      md5: 5fa618276dcb6ab568c9b74e6d3e8a2c
+      size: 1867
+    outs:
+    - path: metrics/train_metrics.json
+      hash: md5
+      md5: 241c154aa3211ff9c50eb8d7e4fdd579
+      size: 92
+    - path: models/model.bin
+      hash: md5
+      md5: c58779db8887da6db47ac11ace2c70e4
+      size: 103567
+    - path: plots/learning_curve.csv
+      hash: md5
+      md5: 9ae506bf0ee52ca486f128eb89c7876d
+      size: 1189

@@ -1,11 +1,32 @@
 stages:
   prepare:
     desc: sanitize the dataset
-    cmd python src/preprocess.python
+    cmd: python src/preprocess.py
     deps:
     - dataset/features.csv
     - src/preprocess.py
     outs:
-    - dataset/train/csv
+    - dataset/train.csv
     - dataset/val.csv
     - dataset/test.csv
+
+  train:
+    desc: train the model
+    cmd: python src/train.py ${train.boost_rounds} ${train.learning_rate} ${train.max_depth}
+    deps:
+    - dataset/train.csv
+    - dataset/val.csv
+    - src/train.py
+    outs:
+    - models/model.bin
+    metrics:
+    - metrics/train_metrics.json:
+        cache: false
+    plots:
+    - plots/learning_curve.csv:
+        x: round
+        x_label: boost round
+        y: mlogloss
+        y_label: multiclass logloss
+        title: Validation loss over time
+        cache: false
