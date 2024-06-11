@@ -1,0 +1,11 @@
+stages:
+  prepare:
+    desc: sanitize the dataset
+    cmd python src/preprocess.python
+    deps:
+    - dataset/features.csv
+    - src/preprocess.py
+    outs:
+    - dataset/train/csv
+    - dataset/val.csv
+    - dataset/test.csv
